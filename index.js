@@ -3,7 +3,7 @@ const { connexioDatabse } = require('./bd/sequelize');
 const cors = require('cors');
 const { Port } = require('./common/common');
 const app = express()
-const port = 3005;
+const port = process.env.PORT || 3005;
 
 app.use(express.static('./public'))
 app.use(express.urlencoded({extended: false}));
@@ -15,7 +15,7 @@ connexioDatabse()
 app.get('/', (req, res) =>{
     res.json("Couture app is running perfectly")
 })
-app.listen(Port, () => console.log("Couture app is running perfectly"));
+app.listen(port, () => console.log("Couture app is running perfectly"));
 
 require('./routes/dressMaker/create')(app)
 

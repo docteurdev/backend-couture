@@ -9,7 +9,7 @@ const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.e
    host: process.env.DB_HOST ||'localhost',
    port: process.env.DB_PORT || 3306,
    dialect: 'mysql',
-   logging: false 
+   logging: console.log 
 })
 
 // object of Modeles
@@ -33,8 +33,7 @@ Mclient.hasMany(Mdress);
 Mdress.belongsTo(Mclient);
 
 const connexioDatabse= () =>{
-    return sequelize.sync({}).then(_ =>{
-
+    return sequelize.sync({alter: true}).then(_ =>{
     }).then(data =>{})
 }
 
