@@ -7,7 +7,7 @@ const modelCatalogue= require('../models/Cataogue')
 //  database connexion
 const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.env.DB_USER || 'root', process.env.DB_PASSWORD ||'root', {
    host: process.env.DB_HOST ||'localhost',
-   port: 7963 ,
+   port: process.env.NODE_ENV === 'production'? 7963 : 3306 ,
    dialect: 'mysql',
    logging: console.log 
 })
