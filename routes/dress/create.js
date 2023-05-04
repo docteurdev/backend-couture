@@ -1,6 +1,6 @@
 const { ValidationError, UniqueConstraintError } = require("sequelize");
 const { MdressMaker, Mclient, Mdress } = require("../../bd/sequelize");
-const { errorServer, Port } = require("../../common/common");
+const { errorServer, Port, APP_HOST } = require("../../common/common");
 
 const multer  = require('multer')
 const path= require('path');
@@ -36,8 +36,8 @@ module.exports = (app) => {
 
         const commande ={
             ...clentInfo,
-            tissus:tissuImg?`http://localhost:${Port}/${tissuImg}`: null,
-            photos:modelImg?`http://localhost:${Port}/${modelImg}`: null
+            tissus:tissuImg?`${APP_HOST}${tissuImg}`: null,
+            photos:modelImg?`${APP_HOST}${modelImg}`: null
     
         }
 
