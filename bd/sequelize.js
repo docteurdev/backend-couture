@@ -9,7 +9,7 @@ const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.e
    host: process.env.DB_HOST ||'localhost',
    port: process.env.NODE_ENV === 'production'? 7963 : 3306 ,
    dialect: 'mysql',
-   logging: console.log 
+   logging: false
 })
 
 // object of Modeles

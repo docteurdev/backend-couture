@@ -1,6 +1,6 @@
 const { ValidationError, UniqueConstraintError } = require("sequelize");
 const { MdressMaker, Mclient, Mdress } = require("../../bd/sequelize");
-const { errorServer, Port, APP_HOST } = require("../../common/common");
+const { errorServer, Port } = require("../../common/common");
 
 const multer  = require('multer')
 const path= require('path');
@@ -23,10 +23,10 @@ const pickFile = (files, choice) =>{
 module.exports = (app) => {
     app.post("/api/coutre/create-cmd",upload.array('files'),(req, res) => {
         let clentInfo = JSON.parse(req.body.dataCmd)
-        const { dressMakerID, clientId } = clentInfo;
+        const { dressMakerID, clientId,model,tissu } = clentInfo;
 
-        const tissu = pickFile(req.files, 'tissu-jpg.jpg');
-        const model = pickFile(req.files, 'model-jpg.jpg');
+        // const tissu = pickFile(req.files, 'tissu-jpg.jpg');
+        // const model = pickFile(req.files, 'model-jpg.jpg');
         var dressmakerM, clientM, dressM;
 
         console.log("mes files", tissu, model);
@@ -36,10 +36,13 @@ module.exports = (app) => {
 
         const commande ={
             ...clentInfo,
-            tissus:tissuImg?`${APP_HOST}${tissuImg}`: null,
-            photos:modelImg?`${APP_HOST}${modelImg}`: null
-    
+            // tissus:tissuImg?`http://localhost:${Port}/${tissuImg}`: null,
+            // photos:modelImg?`http://localhost:${Port}/${modelImg}`: null
+            tissus:tissu ,
+            photos: model
         }
+
+        console.log(commande);
 
         MdressMaker.findByPk(dressMakerID).then((dressmaker) => {
             dressmakerM = dressmaker;
