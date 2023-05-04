@@ -15,7 +15,7 @@ connexioDatabse()
 app.get('/', (req, res) =>{
     res.json("Couture app is running perfectly")
 })
-app.listen(port, () => console.log(`Couture app is running perfectly: ${process.env.DB_HOST ||'localhost'} ${port}`));
+app.listen(port, () => console.log(`Couture app is running perfectly: ${process.env.PORT || 3005}`));
 
 require('./routes/dressMaker/create')(app)
 
