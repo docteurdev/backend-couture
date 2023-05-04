@@ -15,7 +15,7 @@ connexioDatabse()
 app.get('/test', (req, res) =>{
     res.json("Couture app is running perfectly")
 })
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, () => {
     console.log(`Couture app is running perfectly: ${process.env.PORT || 3000}`)
 });
 
