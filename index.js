@@ -12,10 +12,12 @@ app.use(cors())
 
 // connexion to database;
 connexioDatabse()
-app.get('/', (req, res) =>{
+app.get('/test', (req, res) =>{
     res.json("Couture app is running perfectly")
 })
-app.listen(port, () => console.log(`Couture app is running perfectly: ${process.env.PORT || 3000}`));
+app.listen(port,process.env.DB_HOST ||'localhost', () => {
+    console.log(`Couture app is running perfectly: ${process.env.PORT || 3000}`)
+});
 
 require('./routes/dressMaker/create')(app)
 
