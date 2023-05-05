@@ -17,9 +17,9 @@ const storage= multer.diskStorage({
 const upload = multer({storage: storage})
 
 module.exports= (app) =>{
-    app.post('/api/coutre/get-catalogue',upload.single('model'), (req, res) =>{
+    app.post('/api/coutre/get-catalogue', (req, res) =>{
         var dressMaker, newCat;
-        let cat ={...req.body, image:`http://localhost:${Port}/${req.file.filename}`}
+        let cat ={...req.body}
         MdressMaker.findByPk(req.body.id_dressMaker).then(dressMk =>{
             dressMaker = dressMk;
             MCatalogue.create(cat).then(catalogue =>{
