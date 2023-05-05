@@ -35,8 +35,8 @@ module.exports = (app) => {
 
         console.log("mes files88888888888888888888", clentInfo);
         // console.log(req.body);
-        const tissuImg = tissu?tissu.filename : null
-       const  modelImg=  model?model.filename : null
+    //     const tissuImg = tissu?tissu.filename : null
+    //    const  modelImg=  model?model.filename : null
 
         const commande ={
             ...clentInfo,
