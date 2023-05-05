@@ -22,14 +22,18 @@ const pickFile = (files, choice) =>{
 
 module.exports = (app) => {
     app.post("/api/coutre/create-cmd",upload.array('files'),(req, res) => {
-        let clentInfo = JSON.parse(req.body.dataCmd)
-        const { dressMakerID, clientId,model,tissu } = clentInfo;
+        // let clentInfo = JSON.parse(req.body.dataCmd)
+        // const { dressMakerID, clientId,model,tissu } = clentInfo;
+
+        let clentInfo = req.body
+        const { dressMakerID, clientId } = clentInfo;
+
 
         // const tissu = pickFile(req.files, 'tissu-jpg.jpg');
         // const model = pickFile(req.files, 'model-jpg.jpg');
         var dressmakerM, clientM, dressM;
 
-        console.log("mes files", tissu, model);
+        console.log("mes files88888888888888888888", clentInfo);
         // console.log(req.body);
         const tissuImg = tissu?tissu.filename : null
        const  modelImg=  model?model.filename : null
@@ -38,11 +42,11 @@ module.exports = (app) => {
             ...clentInfo,
             // tissus:tissuImg?`http://localhost:${Port}/${tissuImg}`: null,
             // photos:modelImg?`http://localhost:${Port}/${modelImg}`: null
-            tissus:tissu ,
-            photos: model
+            // tissus:tissu ,
+            // photos: model
         }
 
-        console.log(commande);
+       // console.log(commande);
 
         MdressMaker.findByPk(dressMakerID).then((dressmaker) => {
             dressmakerM = dressmaker;
