@@ -7,7 +7,6 @@ module.exports = (app) => {
 
         let dressM, clientM;
 
-         console.log(req.body);
         Mclient.create(req.body, { include: [MdressMaker] }).then(client => {
             clientM = client
             console.log("found clientM",clientM);

@@ -3,7 +3,9 @@ const { Sequelize, DataTypes } = require("sequelize");
 const modelCilent = require('../models/Client');
 const modelDressMaker = require('../models/DressMaker');
 const modelDress = require('../models/Dress');
-const modelCatalogue= require('../models/Cataogue')
+const modelCatalogue= require('../models/Cataogue');
+const modelDressType= require('../models/dressType');
+const modelCustomDressType= require('../models/customDressType');
 //  database connexion
 const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.env.DB_USER || 'root', process.env.DB_PASSWORD ||'root', {
    host: process.env.DB_HOST ||'localhost',
@@ -16,11 +18,19 @@ const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.e
 const MdressMaker = modelDressMaker(sequelize, DataTypes);
 const Mclient = modelCilent(sequelize, DataTypes);
 const Mdress = modelDress(sequelize, DataTypes);
-const MCatalogue= modelCatalogue(sequelize, DataTypes)
+const MCatalogue= modelCatalogue(sequelize, DataTypes);
+const MdressType = modelDressType(sequelize, DataTypes);
+const MCustomdressType = modelCustomDressType(sequelize, DataTypes);
 
 // assossiation;
 MdressMaker.hasMany(MCatalogue);
 MCatalogue.belongsTo(MdressMaker)
+
+MdressMaker.hasMany(MdressType);
+MdressType.belongsTo(MdressMaker)
+
+MdressMaker.hasMany(MCustomdressType);
+MCustomdressType.belongsTo(MdressMaker)
 
 
 MdressMaker.hasMany(Mclient);
@@ -41,4 +51,4 @@ sequelize.authenticate()
 .then(_ => console.log("sequelize is connected to couture database") )
 .catch( error => console.log(error));
 
-module.exports={connexioDatabse, Mclient, MdressMaker, Mdress, MCatalogue}
+module.exports={connexioDatabse, Mclient, MdressMaker, Mdress, MCatalogue,MCustomdressType,MdressType}

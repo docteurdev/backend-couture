@@ -6,8 +6,8 @@ const { MdressMaker } = require("../../bd/sequelize")
 module.exports= (app) =>{
     app.post('/api/coutre/login', (req, res) =>{
         
-        MdressMaker.findOne({where:{name: req.body.name, phone: req.body.phone}}).then((user) => {
-            console.log(user);
+        MdressMaker.findOne({where:{phone: req.body.phone}}).then((user) => {
+            // console.log(user);
            
             if(user){
                 bcript.compare(req.body.password, user.password).then(isPasswordValid =>{
@@ -29,7 +29,7 @@ module.exports= (app) =>{
                     }
                 })
             }else{
-                let message="soyez sûr d'avoir entré le bon de téléphone ou votre nom"
+                let message="Entrez le bon numéro de téléphone"
                 return res.status(401).json({message})
             }
         }).catch((err) => {
