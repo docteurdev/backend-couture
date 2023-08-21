@@ -5,8 +5,14 @@ module.exports = (app) => {
     app.post('/api/coutre/create-dressMaker', (req, res) => {
         console.log(req.body);
         let password = req.body.password;
+       MdressMaker.findAll({where:{phone: req.body.phone}}).then(isPhoneExist =>{
 
-        bcript.hash(password, 10)
+        if(isPhoneExist.length > 0){
+             let message = "Ce numéro est déjà utilisé"
+             return  res.status(404).json({message}) ;
+        }else{
+
+            bcript.hash(password, 10)
             .then(hash => {
                 let newUser = {
                     ...req.body,
@@ -14,8 +20,9 @@ module.exports = (app) => {
                 }
                 return MdressMaker.create(newUser)
                     .then(dressMaker => {
-                        let message = `le nouveau couturier ${dressMaker.name} ${dressMaker.lastName} est ajouté avec succès`;
-                        return res.json({ message, data: dressMaker })
+
+                        let message = `Votre compte est créé avec succès`;
+                        return res.json({ message})
                     }).catch(error => {
 
                         if (error instanceof ValidationError) {
@@ -30,6 +37,11 @@ module.exports = (app) => {
                         return res.status(500).json({ message: error.message, data: error })
                     })
             })
+
+        }
+
+       })
+
         //MdressMaker.
     })
 }

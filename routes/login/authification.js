@@ -7,7 +7,6 @@ module.exports= (app) =>{
     app.post('/api/coutre/login', (req, res) =>{
         
         MdressMaker.findOne({where:{phone: req.body.phone}}).then((user) => {
-            // console.log(user);
            
             if(user){
                 bcript.compare(req.body.password, user.password).then(isPasswordValid =>{
