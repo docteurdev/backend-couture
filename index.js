@@ -19,8 +19,9 @@ app.listen(port, () => {
     console.log(`Couture app is running perfectly: ${port}`);
     console.log(`path: ${__dirname}`);
 });
-
+//  dressMaker route
 require('./routes/dressMaker/create')(app)
+require('./routes/dressMaker/edit')(app)
 
 // clients routes
 require('./routes/client/create')(app)
@@ -37,18 +38,25 @@ require('./routes/dress/getOne')(app);
 
 // login 
 require('./routes/login/authification')(app);
+require('./routes/login/forgot_pw')(app);
+require('./routes/login/new_pw')(app);
 
 // catalogue
 require('./routes/catalogue/create')(app);
 require('./routes/catalogue/getAll')(app);
+require('./routes/catalogue/delete')(app);
 
 // dressTYpe
 
 require('./routes/dresstype/create')(app);
+// require('./routes/dresstype/')(app);
 
 
 // custom dressTYpe
 
 require('./routes/dressCustomType/create')(app);
+require('./routes/dressCustomType/update')(app);
+require('./routes/dressCustomType/getAll')(app);
+require('./routes/dressCustomType/delete')(app);
 
 
