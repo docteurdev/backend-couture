@@ -7,12 +7,20 @@ const modelCatalogue= require('../models/Cataogue');
 const modelDressType= require('../models/dressType');
 const modelCustomDressType= require('../models/customDressType');
 //  database connexion
-const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.env.DB_USER || 'root', process.env.DB_PASSWORD ||'root', {
+const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.env.DB_USER || 'root', process.env.DB_PASSWORD ||'root123', {
    host: process.env.DB_HOST ||'localhost',
    port: process.env.NODE_ENV === 'production'? 7963 : 3306 ,
    dialect: 'mysql',
    logging: false
 })
+
+// const sequelize = new Sequelize('app_couture', 'oumardev','dev2023', {
+//     host: 'localhost',
+//     port: 3000 ,
+//     dialect: 'mysql',
+//     logging: false
+//  })
+ 
 
 // object of Modeles
 const MdressMaker = modelDressMaker(sequelize, DataTypes);

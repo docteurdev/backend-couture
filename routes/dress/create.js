@@ -22,10 +22,12 @@ const pickFile = (files, choice) =>{
 
 module.exports = (app) => {
     app.post("/api/coutre/create-cmd",upload.array('files'),(req, res) => {
-        // let clentInfo = JSON.parse(req.body.dataCmd)
+        console.log("mes files88888888888888888888", req.files);
+         let clentInfo = JSON.parse(req.body.dataCmd)
+         const orderFile = req.files
         // const { dressMakerID, clientId,model,tissu } = clentInfo;
 
-        let clentInfo = req.body
+        // let clentInfo = req.body
         const { dressMakerID, clientId } = clentInfo;
 
 
@@ -33,15 +35,12 @@ module.exports = (app) => {
         // const model = pickFile(req.files, 'model-jpg.jpg');
         var dressmakerM, clientM, dressM;
 
-        console.log("mes files88888888888888888888", clentInfo);
         // console.log(req.body);
-    //     const tissuImg = tissu?tissu.filename : null
-    //    const  modelImg=  model?model.filename : null
 
         const commande ={
             ...clentInfo,
-            // tissus:tissuImg?`http://localhost:${Port}/${tissuImg}`: null,
-            // photos:modelImg?`http://localhost:${Port}/${modelImg}`: null
+            tissus:orderFile[0]?`http://www.affairez.com:${Port}/api/coutre/${orderFile[0]?.filename}`: null,
+            photos:orderFile[1]?`http://www.affairez.com:${Port}/api/coutre/${orderFile[1]?.filename}`: null
             // tissus:tissu ,
             // photos: model
         }
