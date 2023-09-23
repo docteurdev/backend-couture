@@ -28,7 +28,7 @@ module.exports = (app) => {
         const newDress = {
             DressMakerId,
             nameDress,
-            imageDress: req.file? `http://localhost:${Port}/${req.file?.filename}` : "",
+            imageDress: req.file? `http://www.affairez.com:3000/${req.file?.filename}` : "",
             measuresDress,
             typeDress,
      

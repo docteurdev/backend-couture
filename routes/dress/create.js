@@ -39,8 +39,8 @@ module.exports = (app) => {
 
         const commande ={
             ...clentInfo,
-            tissus:orderFile[0]?`http://www.affairez.com:${Port}/api/coutre/${orderFile[0]?.filename}`: null,
-            photos:orderFile[1]?`http://www.affairez.com:${Port}/api/coutre/${orderFile[1]?.filename}`: null
+            tissus:orderFile[0]?`http://www.affairez.com:3000/${orderFile[0]?.filename}`: null,
+            photos:orderFile[1]?`http://www.affairez.com:3000/${orderFile[1]?.filename}`: null
             // tissus:tissu ,
             // photos: model
         }

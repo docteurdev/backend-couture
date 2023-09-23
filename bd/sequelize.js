@@ -16,7 +16,7 @@ const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.e
 
 // const sequelize = new Sequelize('app_couture', 'oumardev','dev2023', {
 //     host: 'localhost',
-//     port: 3000 ,
+//     port: 3306 ,
 //     dialect: 'mysql',
 //     logging: false
 //  })

@@ -5,6 +5,46 @@ const private_key = require('../../auth/private_key');
 const { MdressMaker } = require("../../bd/sequelize")
 module.exports= (app) =>{
     app.post('/api/coutre/login', (req, res) =>{
+
+        // try {
+
+        //     const findDressMaker = await MdressMaker.findOne({
+        //         where: { phone: req.body.phone },
+        //       });
+          
+        //       if (!findDressMaker) {
+        //         let message = "Entrez le bon numéro de téléphone";
+        //         return res.status(401).json({ message });
+        //       } else {
+        //         const findpw = await bcript.compare(
+        //           req.body.password,
+        //           findDressMaker.password
+        //         );
+        //         if (!findpw) {
+        //           let message = "mot de passe incorrect";
+        //           return res.status(404).json(message);
+        //         } else {
+        //           const token = jwt.sign({ userId: findDressMaker.id }, private_key, {
+        //             expiresIn: "24",
+        //           });
+          
+        //           const dressMaker = {
+        //             id: findDressMaker.id,
+        //             name: findDressMaker.name,
+        //             lastname: findDressMaker.lastname,
+        //             phone: findDressMaker.phone,
+        //           };
+        //           let message = "Vous êtes bien connecté";
+        //           return res.json({ message, data: dressMaker, token });
+        //         }
+        //       }
+          
+            
+        // } catch (error) {
+        //   return res.json({message: err.message, data: err})
+            
+        // }
+    
         
         MdressMaker.findOne({where:{phone: req.body.phone}}).then((user) => {
            

@@ -1,9 +1,8 @@
 const express = require('express');
 const { connexioDatabse } = require('./bd/sequelize');
 const cors = require('cors');
-const { Port } = require('./common/common');
 const app = express()
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 3000;
 
 app.use(express.static('./public'))
 app.use(express.urlencoded({extended: false}));
@@ -35,6 +34,7 @@ require('./routes/dress/create')(app);
 require('./routes/dress/update')(app);
 require('./routes/dress/getAll')(app);
 require('./routes/dress/getOne')(app);
+require('./routes/dress/payement')(app);
 
 // login 
 require('./routes/login/authification')(app);
