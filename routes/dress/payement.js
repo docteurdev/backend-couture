@@ -1,9 +1,10 @@
 const { ValidationError, UniqueConstraintError } = require("sequelize");
 const { Mdress } = require("../../bd/sequelize");
 const { errorServer } = require("../../common/common");
+const paiement = require("../../middleware/paiement");
 
 module.exports = (app) => {
-    app.put('/api/coutre/payment', (req, res) => {
+    app.put('/api/coutre/payment',paiement, (req, res) => {
         const { clientId, dressMakerId, dressId,payment, solde_cal } = req.body;
         console.log(req.body);
         Mdress.update({paiement: payment, solde_cal}, {where: {cmd_id: dressId, DressMakerId: dressMakerId, ClientId: clientId } }).then(_ => {

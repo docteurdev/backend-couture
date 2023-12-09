@@ -1,6 +1,7 @@
 const express = require('express');
 const { connexioDatabse } = require('./bd/sequelize');
 const cors = require('cors');
+const paiement = require('./middleware/paiement');
 const app = express()
 const port = process.env.PORT || 3000;
 
@@ -59,4 +60,17 @@ require('./routes/dressCustomType/update')(app);
 require('./routes/dressCustomType/getAll')(app);
 require('./routes/dressCustomType/delete')(app);
 
+// subscription type
 
+require('./routes/subscription_type/create')(app);
+require('./routes/subscription_type/update')(app);
+require('./routes/subscription_type/delete')(app);
+require('./routes/subscription_type/getAll')(app);
+
+// subscriptions
+
+require('./routes/suscription/create')(app);
+require('./routes/suscription/getAll')(app);
+require('./routes/suscription/get_all_by_id')(app);
+require('./routes/suscription/findOne')(app);
+require('./routes/suscription/subscribe')(app);

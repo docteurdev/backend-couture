@@ -25,6 +25,12 @@ module.exports=(sequelize, DataTypes) =>{
         photo:{
             type: DataTypes.STRING,
             allowNull: true
-        }
+        },
+        subscribe:{
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
+        },
+        
     })
 }

@@ -6,6 +6,9 @@ const modelDress = require('../models/Dress');
 const modelCatalogue= require('../models/Cataogue');
 const modelDressType= require('../models/dressType');
 const modelCustomDressType= require('../models/customDressType');
+const modelSubscription = require("../models/Subscription");
+const modelSubscriptionType = require("../models/SubscriptionType");
+
 //  database connexion
 const sequelize = new Sequelize(process.env.DB_NAME || 'couture-back', process.env.DB_USER || 'root', process.env.DB_PASSWORD ||'root123', {
    host: process.env.DB_HOST ||'localhost',
@@ -29,8 +32,15 @@ const Mdress = modelDress(sequelize, DataTypes);
 const MCatalogue= modelCatalogue(sequelize, DataTypes);
 const MdressType = modelDressType(sequelize, DataTypes);
 const MCustomdressType = modelCustomDressType(sequelize, DataTypes);
+const MmodelSubscription = modelSubscription(sequelize, DataTypes);
+const MmodelSubscriptionType = modelSubscriptionType(sequelize, DataTypes);
 
 // assossiation;
+MdressMaker.hasMany(MmodelSubscription);
+MmodelSubscription.belongsTo(MdressMaker);
+
+MmodelSubscription.belongsTo(MmodelSubscriptionType);
+
 MdressMaker.hasMany(MCatalogue);
 MCatalogue.belongsTo(MdressMaker)
 
@@ -59,4 +69,4 @@ sequelize.authenticate()
 .then(_ => console.log("sequelize is connected to couture database") )
 .catch( error => console.log(error));
 
-module.exports={connexioDatabse, Mclient, MdressMaker, Mdress, MCatalogue,MCustomdressType,MdressType}
+module.exports={connexioDatabse, Mclient, MdressMaker, Mdress, MCatalogue,MCustomdressType,MdressType, MmodelSubscriptionType, MmodelSubscription}

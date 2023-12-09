@@ -4,6 +4,7 @@ module.exports = (app) =>{
     app.get("/api/coutre/get-customDress/:id", async (req, res) =>{
 
         const {id} = req.params;
+        console.log(id);
 
         try {
             const dress = await MCustomdressType.findAll({where:{DressMakerId: id}});

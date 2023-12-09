@@ -4,6 +4,7 @@ const { errorServer, Port } = require("../../common/common");
 
 const multer  = require('multer')
 const path= require('path');
+const paiement = require("../../middleware/paiement");
 
 
 const storage= multer.diskStorage({
@@ -21,14 +22,14 @@ const pickFile = (files, choice) =>{
 
 
 module.exports = (app) => {
-    app.post("/api/coutre/create-cmd",upload.array('files'),(req, res) => {
-        console.log("mes files88888888888888888888", req.files);
-         let clentInfo = JSON.parse(req.body.dataCmd)
-         const orderFile = req.files
-        // const { dressMakerID, clientId,model,tissu } = clentInfo;
+    app.post("/api/coutre/create-cmd", upload.array('files'),(req, res) => {
+
+        let clentInfo = JSON.parse(req.body.dataCmd)
+         const orderFile = req.files;
+        // const { dressMakerId, clientId,model,tissu } = clentInfo;
 
         // let clentInfo = req.body
-        const { dressMakerID, clientId } = clentInfo;
+        const { dressMakerId, clientId } = clentInfo;
 
 
         // const tissu = pickFile(req.files, 'tissu-jpg.jpg');
@@ -45,20 +46,30 @@ module.exports = (app) => {
             // photos: model
         }
 
-       // console.log(commande);
 
-        MdressMaker.findByPk(dressMakerID).then((dressmaker) => {
+        MdressMaker.findByPk(dressMakerId).then((dressmaker) => {
             dressmakerM = dressmaker;
-             Mclient.findByPk(clientId).then(client => {
-                clientM = client;
-             Mdress.create(commande).then(cmd =>{
-                 dressM =cmd
-                  dressmakerM.addCommande(dressM);
-                  clientM.addCommande(dressM)
-                let message=`la nouvelle commande de ${clientM.name} ${clientM.lastname} est ajoutée avec succès`
-                return res.json({message, data: cmd})
-             })
-            })
+
+            if(!dressmaker?.subscribe){
+                // console.log(dressmaker);
+                return res.status(403).json({message: "Veillez souscrire à un forfait"})
+            }
+
+            else{
+                
+                Mclient.findByPk(clientId).then(client => {
+                   clientM = client;
+                Mdress.create(commande).then(cmd =>{
+                    dressM =cmd
+                     dressmakerM.addCommande(dressM);
+                     clientM.addCommande(dressM)
+                   let message=`la nouvelle commande de ${clientM.name} ${clientM.lastname} est ajoutée avec succès`
+                   return res.json({message, data: cmd})
+                })
+               }
+               
+               )
+            }
         }).catch((err) => {
             if(err instanceof ValidationError){
                 return res.json({message: err.message, data: err})
